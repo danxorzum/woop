@@ -1,0 +1,19 @@
+name: woop
+
+packages:
+  - /**
+
+scripts:
+  test:
+    run: flutter test
+    description: Run tests
+  
+  test:dart:
+    run: melos exec dart test
+    description: Run test in all dart packages
+    select-package:
+      flutter: false
+      dir-exists: test
+  generate:
+    run: melos exec flutter pub run build_runner build
+    description: Run generate files
