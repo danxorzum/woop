@@ -1,11 +1,13 @@
 name: woop
 
 packages:
-  - /**
+  - /packages/**
+  # - /packages/wp_api/
+  # - /packages/woop_api/
 
 scripts:
   test:
-    run: flutter test
+    run: melos exec flutter test
     description: Run tests
   
   test:dart:
@@ -16,4 +18,7 @@ scripts:
       dir-exists: test
   generate:
     run: melos exec flutter pub run build_runner build
+    description: Run generate files
+  generate:dart:
+    run: melos exec dart pub run build_runner build
     description: Run generate files
