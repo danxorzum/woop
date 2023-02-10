@@ -1,6 +1,8 @@
 ///{@template woo_response}
 /// A response from the Wordpress, WooCommerce API.
 /// {@endtemplate}
+// ignore_for_file: lines_longer_than_80_chars
+
 class WoopResponse {
   /// {@macro woo_response}
   WoopResponse({

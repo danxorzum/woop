@@ -10,7 +10,7 @@ enum WoopExceptionType {
   unauthorized(401),
 
   ///Forbidden
-  ///The request is understood, but it has been refused or access is not allowed.
+  ///The request has been refused or access is not allowed.
   forbidden(403),
 
   /// The requested resource does not exist.
@@ -73,7 +73,7 @@ class WoopAPIException implements Exception {
   /// ```
   factory WoopAPIException.fromJson(String resp, int statusCode) {
     try {
-      final json = j.json.decode(resp);
+      final json = j.json.decode(resp) as Map<String, dynamic>;
       return WoopAPIException(
         message: json['message'] as String,
         code: json['code'] as String,

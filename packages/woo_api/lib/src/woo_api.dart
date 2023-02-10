@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:woo_api/src/constants.dart';
 import 'package:woop_api/woop_api.dart';
@@ -18,7 +20,10 @@ class WooApi {
   //Verify status code
   WoopResponse? _verifyStatusCode(http.Response resp) {
     if (resp.statusCode < 300) {
-      return WoopResponse(body: resp.body, headers: resp.headers);
+      return WoopResponse(
+        body: json.decode(resp.body),
+        headers: resp.headers,
+      );
     }
     throw WoopAPIException.fromJson(resp.body, resp.statusCode);
   }
@@ -30,10 +35,15 @@ class WooApi {
   /// If there is an error, throw a [WoopException] object.
   /// {@endmacro}
   Future<WoopResponse?> getProducts({
-    Map<String, String>? queryParameters,
+    Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
+    int? id,
   }) async {
-    final url = Uri.https(_baseUrl, PRODUCTS, queryParameters);
+    final url = Uri.https(
+      _baseUrl,
+      id != null ? '$PRODUCTS/$id' : PRODUCTS,
+      queryParameters,
+    );
     try {
       final resp = await _client.get(url, headers: headers);
       return _verifyStatusCode(resp);
@@ -48,7 +58,7 @@ class WooApi {
   /// {@macro errors}
   Future<WoopResponse?> getVariations(
     int productId, {
-    Map<String, String>? queryParameters,
+    Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
     final url = Uri.https(_baseUrl, VARIATIONS(productId), queryParameters);
@@ -65,7 +75,7 @@ class WooApi {
   /// Call the WooCommerce API to get categories.
   /// {@macro errors}
   Future<WoopResponse?> getCategories({
-    Map<String, String>? queryParameters,
+    Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
     final url = Uri.https(_baseUrl, CATEGORIES, queryParameters);

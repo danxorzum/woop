@@ -75,6 +75,4 @@ class JwtData {
 
   ///User display name.
   final String displayName;
-
-  Map<String, dynamic> toJson() => _$JwtDataToJson(this);
 }

@@ -1,13 +1,12 @@
 name: woop
 
 packages:
-  - /packages/**
-  # - /packages/wp_api/
-  # - /packages/woop_api/
+  - .
+  - packages/*
 
 scripts:
   test:
-    run: melos exec flutter test
+    run: flutter test
     description: Run tests
   
   test:dart:
@@ -17,8 +16,28 @@ scripts:
       flutter: false
       dir-exists: test
   generate:
-    run: melos exec flutter pub run build_runner build
+    run: melos exec --depends-on="build_runner" --depends-on="flutter" --flutter pub run build_runner build 
     description: Run generate files
+
   generate:dart:
-    run: melos exec dart pub run build_runner build
     description: Run generate files
+    exec:  dart pub run build_runner build --delete-conflicting-outputs
+    packageFilters:
+      flutter: false
+      build_runner: true
+  
+  generate:woo:
+    description: Run generate files on woo
+    run: cd packages/woo && dart pub run build_runner build
+
+
+  watch:
+    exec: dart pub run build_runner watch --delete-conflicting-outputs
+    description: watch files
+    packageFilters:
+      flutter: false
+      build_runner: true
+  
+  get:
+    run: melos exec flutter pub get
+    description: Run get packages

@@ -67,7 +67,7 @@ void main() {
 
     test('bad_token_get_products', () async {
       try {
-        final err = await wooApi.getProducts(queryParameters: {'page': 'e'});
+        await wooApi.getProducts(queryParameters: {'page': 'e'});
         fail('should throw an exception');
       } on WoopAPIException catch (e) {
         expect(e.statusCode, 401);
@@ -97,7 +97,7 @@ void main() {
       try {
         final resp = await wooApi.getProducts(queryParameters: {'page': '0'});
         expect(resp, isNotNull);
-        expect(resp!.body, '[]');
+        expect(resp!.body, []);
       } catch (e) {
         fail('Should not throw an exception: $e');
       }

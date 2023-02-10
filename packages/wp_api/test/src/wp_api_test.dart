@@ -6,8 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'package:woop_api/woop_api.dart';
-import 'package:wp_api/src/constants.dart';
 import 'package:wp_api/wp_api.dart';
 
 import 'response.dart';
@@ -69,7 +67,6 @@ void main() {
       try {
         final res = await wpApi.getMe();
         expect(res, isNotNull);
-        print(res?.body);
       } catch (e) {
         fail('login should not fail');
       }

@@ -19,7 +19,7 @@ class Wp {
       final jwt = await _api.login(user: username, password: password);
       if (jwt != null) {
         final user = await _api.getMe(
-          headers: {'Authorization': 'Bearer ${jwt.data.token}}'},
+          headers: {'Authorization': 'Bearer ${jwt.data.token}'},
         );
         if (user != null) {
           return LoginWoop(

@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 const error =
     '{"code": "rest_no_route","message": "No route was found matching the URL and request method","data": {"status": 404}}';
 const badToken =

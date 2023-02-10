@@ -42,13 +42,12 @@ void main() {
 
     test('bad exception', () {
       try {
-        final wooRes = WoopAPIException.fromJson(
+        WoopAPIException.fromJson(
           product,
           500,
         );
       } on WoopException catch (e) {
         expect(e.message, isNotNull);
-        print(e.message);
       } catch (e) {
         fail('Should throw WoopException');
       }

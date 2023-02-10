@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 /// The base URL for the WooCommerce API.
 const String WOOV3 = '/wp-json/wc/v3';
